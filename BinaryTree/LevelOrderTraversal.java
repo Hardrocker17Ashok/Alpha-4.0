@@ -17,48 +17,45 @@ public class LevelOrderTraversal {
 
     }
 
-    static class Binary {
-        static int ind = -1;
+    static int ind = -1;
 
-        public static Node build(int arr[]) {
-            ind++;
-            if (arr[ind] == -1) {
-                return null;
-            }
-            Node newnode = new Node(arr[ind]);
-            newnode.left = build(arr);
-            newnode.right = build(arr);
-            return newnode;
+    public static Node build(int arr[]) {
+        ind++;
+        if (arr[ind] == -1) {
+            return null;
         }
+        Node newnode = new Node(arr[ind]);
+        newnode.left = build(arr);
+        newnode.right = build(arr);
+        return newnode;
+    }
 
-        public static void LevelOrder(Node Root) {
-            if (Root == null) {
-                return;
-            }
-            Queue<Node> qu = new LinkedList<>();
-            qu.add(Root);
-            qu.add(null);
-            while (!qu.isEmpty()) {
-                Node curr = qu.remove();
-                if (curr == null) {
-                    System.out.println(" ");
-                    if (qu.isEmpty()) {
-                        break;
-                    } else {
-                        qu.add(null);
-                    }
+    public static void LevelOrder(Node Root) {
+        if (Root == null) {
+            return;
+        }
+        Queue<Node> qu = new LinkedList<>();
+        qu.add(Root);
+        qu.add(null);
+        while (!qu.isEmpty()) {
+            Node curr = qu.remove();
+            if (curr == null) {
+                System.out.println(" ");
+                if (qu.isEmpty()) {
+                    break;
                 } else {
-                    System.out.print(curr.data + " ");
-                    if (curr.left != null) {
-                        qu.add(curr.left);
-                    }
-                    if (curr.right != null) {
-                        qu.add(curr.right);
-                    }
+                    qu.add(null);
+                }
+            } else {
+                System.out.print(curr.data + " ");
+                if (curr.left != null) {
+                    qu.add(curr.left);
+                }
+                if (curr.right != null) {
+                    qu.add(curr.right);
                 }
             }
         }
-
     }
 
     public static void main(String[] args) {
@@ -77,7 +74,7 @@ public class LevelOrderTraversal {
 
         // we know that in preorder first node is root node
         // so
-        Binary ob = new Binary();
+        LevelOrderTraversal ob = new LevelOrderTraversal();
         Node Root = ob.build(arr);
         ob.LevelOrder(Root);
     }

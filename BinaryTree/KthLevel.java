@@ -1,6 +1,6 @@
-import java.util.*;
+package BinaryTree;
 
-public class NodeCount {
+public class KthLevel {
 
     static class Node {
         int data;
@@ -15,17 +15,19 @@ public class NodeCount {
 
     }
 
-    public static int Count(Node root) {
-        if (root == null) {
-            return 0;
+    public static void Kth(Node node, int level, int k) {
+        if (node == null) {
+            return;
         }
-        int lc = Count(root.left);
-        int rc = Count(root.right);
-        return lc + rc + 1;
+        if (level == k) {
+            System.out.print(node.data + " ");
+            return;
+        }
+        Kth(node.left, level + 1, k);
+        Kth(node.right, level + 1, k);
     }
 
     public static void main(String[] args) {
-
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
@@ -33,7 +35,7 @@ public class NodeCount {
         root.left.right = new Node(5);
         root.right.left = new Node(6);
         root.right.right = new Node(7);
-
-        System.out.println(Count(root));
+        int k = 3;
+        Kth(root, 1, k);
     }
 }

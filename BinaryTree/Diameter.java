@@ -24,6 +24,19 @@ public class Diameter {
         return Math.max(lh, rh) + 1;
     }
 
+    public static int Get_Diameter(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        int leftdi = Get_Diameter(node.left);
+        int lefthi = Height(node.left);
+        int rightdi = Get_Diameter(node.right);
+        int righthi = Height(node.right);
+
+        int selfdi = (lefthi + righthi) + 1;
+        return Math.max(selfdi, Math.max(righthi, leftdi));
+    }
+
     public static void main(String[] args) {
 
         Node root = new Node(1);
@@ -33,7 +46,10 @@ public class Diameter {
         root.left.right = new Node(5);
         root.right.left = new Node(6);
         root.right.right = new Node(7);
+        root.right.right.right = new Node(7);
+        root.right.right.left = new Node(7);
+        root.right.right.right.right = new Node(7);
 
-        System.out.println(Height(root));
+        System.out.println(Get_Diameter(root));
     }
 }

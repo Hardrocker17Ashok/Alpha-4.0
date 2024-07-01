@@ -46,8 +46,8 @@ public class BuildTreeGivenPreOr {
                 return;
             }
             System.out.print(root.data + " ");
-            Inorder(root.left);
-            Inorder(root.right);
+            Preorder(root.left);
+            Preorder(root.right);
 
         }
 
@@ -56,8 +56,8 @@ public class BuildTreeGivenPreOr {
             if (root == null) {
                 return;
             }
-            Inorder(root.left);
-            Inorder(root.right);
+            Postorder(root.left);
+            Postorder(root.right);
             System.out.print(root.data + " ");
 
         }
