@@ -31,18 +31,20 @@ public class Search {
         if (node == null) {
             return false;
         }
-        if (node.data == key) {
-            return true;
-        }
-        boolean left = SearchNode(node.left, key);
-        boolean right = SearchNode(node.right, key);
-
-        // WE CAN RIGHT THIS
-        if (left || right) {
+        if (node.data > key) {
+            return SearchNode(node.left, key);
+        } else if (node.data == key) {
             return true;
         } else {
-            return false;
+            return SearchNode(node.right, key);
         }
+
+        // // WE CAN RIGHT THIS
+        // if (left || right) {
+        // return true;
+        // } else {
+        // return false;
+        // }
 
         // ALSO WE CAN RIGHT THIS
         // return left || right;
@@ -74,7 +76,7 @@ public class Search {
         root = BuildTree(root, 2);
         Preorder(root);
         System.out.println();
-        if (SearchNode(root, 7)) {
+        if (SearchNode(root, 12)) {
             System.out.println("Key is presant");
         } else {
             System.out.println("Key is not presant");

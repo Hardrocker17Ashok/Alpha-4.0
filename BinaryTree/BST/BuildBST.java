@@ -27,7 +27,7 @@ public class BuildBST {
         return node;
     }
 
-    // preorder
+    // inorder
     static void Preorder(Node root) {
         if (root == null) {
             return;

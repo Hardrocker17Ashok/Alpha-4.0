@@ -51,7 +51,7 @@ public class DoublyLL {
         if (head == null) {
             System.out.println("Linked list Already Empty");
             return;
-        }
+        }  
         size--;
         tail.prev.next = null;
         tail = tail.prev;

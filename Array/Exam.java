@@ -1,6 +1,8 @@
 package BinaryTree;
 
-public class BuildTreeGivenPreOr {
+import java.util.Arrays;
+
+public class Exam {
 
     static class Node {
         int data;
@@ -49,6 +51,29 @@ public class BuildTreeGivenPreOr {
 
         }
 
+        public static Node createTree(int pre[],int in[]){
+            if(pre.length==0||in.length==0){
+                return null;
+            }
+            int rootval=pre[0];
+            Node root=new Node(rootval);
+            int rooindedx=0;
+            for(int i=0;i<in.length;i++){
+                if(in[i]==rootval){
+                    rooindedx=i;
+                    break;
+                }
+            }
+            int[]leftInorder=Arrays.copyOfRange(in,0, rooindedx);
+            int[]rightInorder=Arrays.copyOfRange(in, rooindedx+1,in.length);
+            int[]leftPreorder=Arrays.copyOfRange(pre,1, 1+leftInorder.length);
+            int[]rightPreorder=Arrays.copyOfRange(pre,1+leftInorder.length, pre.length);
+
+            root.left=createTree(leftPreorder, leftInorder);
+            root.right=createTree(rightPreorder, rightInorder);
+
+            return root;
+        }
         // postorder
         static void Postorder(Node root) {
             if (root == null) {
@@ -62,16 +87,17 @@ public class BuildTreeGivenPreOr {
 
     public static void main(String[] args) {
         // given preorder traversal
-        int arr[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
+        int pre[] = { 1,2,4,5,3,6 };
+        int in[] = { 4,2,5,1,3,6 };
         // -1 => NULL
 
         // we know that in preorder first node is root node
         // so
         // Binary ob = new Binary();
-        Node Root =build(arr);
-        System.out.println(Root.data);
+        Node Root =createTree(pre,in);
+        
         // ob.Inorder(Root);
-        Preorder(Root);
-        // ob.Postorder(Root);
+        // Preorder(Root);
+        Postorder(Root);
     }
 }
